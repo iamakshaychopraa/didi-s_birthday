@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Surprise For You ♡</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fixed Elements -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+    <div id="cursor-sparkles" aria-hidden="true"></div>
+
+    <button id="music-toggle" class="music-toggle" aria-label="Toggle background music" title="Play music">
+        <span class="music-icon" id="music-icon">♪</span>
+    </button>
+
+    <audio id="bg-music" loop preload="none">
+        <!-- Replace with your music file: <source src="your-song.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <!-- ===== SCREEN 1 — WELCOME ===== -->
+    <section id="welcome-screen" class="screen welcome-screen" aria-label="Welcome">
+        <div id="floating-bg" class="floating-bg" aria-hidden="true"></div>
+        <div class="welcome-content">
+            <span class="welcome-label" aria-hidden="true">A little something for you</span>
+            <h1 class="welcome-title">For my favourite human, Didi&ensp;♡</h1>
+            <p class="welcome-subtitle">I made this tiny corner of the internet just for you. — Akshay</p>
+            <button id="open-btn" class="open-btn" aria-label="Open your surprise">
+                <span>Open your surprise</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== SCREENS 2-7 — MAIN CONTENT ===== -->
+    <main id="main-content" class="main-content" aria-hidden="true">
+
+        <!-- SCREEN 2 — REVEAL -->
+        <section id="reveal-section" class="screen reveal-screen" aria-label="Birthday Reveal">
+            <div class="reveal-inner scroll-reveal">
+                <span class="reveal-sparkle" aria-hidden="true">✦</span>
+                <h2 class="reveal-title" id="reveal-title">Happy Birthday! Didi</h2>
+                <p class="reveal-subtitle" id="reveal-subtitle">
+                    Today is all about celebrating the most wonderful person I know.<br>
+                    I hope this little surprise makes you smile&ensp;♡
+                </p>
+                <div class="reveal-dots" aria-hidden="true">
+                    <span>♡</span><span>✦</span><span>♡</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3 — LETTER -->
+        <section id="letter-section" class="screen letter-screen" aria-label="A heartfelt letter">
+            <div class="section-head scroll-reveal">
+                <span class="section-label">From the heart</span>
+                <h2 class="section-title">A Little Letter For You</h2>
+            </div>
+            <article class="letter-card scroll-reveal" id="letter-card">
+                <div class="letter-deco lt" aria-hidden="true">❀</div>
+                <div class="letter-deco rt" aria-hidden="true">✦</div>
+                <p class="letter-greeting" id="letter-greeting">Dear Sister,</p>
+                <div class="letter-body" id="letter-body">
+                    <p>If I could wrap up all the gratitude and love I have for you and hand it over in a box, it still wouldn't be enough.</p>
+                    <p>You've been my partner in crime, my shoulder to lean on, my loudest cheerleader, and honestly — the funniest person I know (don't let it go to your head).</p>
+                    <p>Through every silly argument over nothing, every late-night talk, every moment you showed up for me without being asked — you've made my life richer just by being in it.</p>
+                    <p>So today, on YOUR day, I just want to say: thank you for being you. The world is so much better with you in it, and I'm the luckiest to call you my sister.</p>
+                    <p>Here's to another year of adventures, inside jokes, questionable decisions, and unconditional love.&ensp;🤍</p>
+                </div>
+                <p class="letter-closing" id="letter-closing">All my love, always</p>
+                <p class="letter-sig" id="letter-sig">— Your sibling&ensp;♡</p>
+                <div class="letter-deco br" aria-hidden="true">🌸</div>
+            </article>
+        </section>
+
+        <!-- SCREEN 4 — REASONS -->
+        <section id="reasons-section" class="screen reasons-screen" aria-label="Things I love about you">
+            <div class="section-head scroll-reveal">
+                <span class="section-label">Just a few of many</span>
+                <h2 class="section-title">Little Things I Love About You</h2>
+            </div>
+            <div class="reasons-grid" id="reasons-grid">
+                <!-- Cards populated by JS from config -->
+            </div>
+        </section>
+
+        <!-- SCREEN 5 — OPEN WHEN -->
+        <section id="open-when-section" class="screen open-when-screen" aria-label="Open-when cards">
+            <div class="section-head scroll-reveal">
+                <span class="section-label">A little something extra</span>
+                <h2 class="section-title">Open When...</h2>
+            </div>
+            <div class="envelopes-grid" id="envelopes-grid">
+                <!-- Envelopes populated by JS from config -->
+            </div>
+        </section>
+
+        <!-- Envelope Modal -->
+        <div id="envelope-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Message" tabindex="-1">
+            <div class="modal-card">
+                <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+                <span class="modal-emoji" id="modal-emoji"></span>
+                <h3 class="modal-heading" id="modal-heading"></h3>
+                <p class="modal-body" id="modal-body"></p>
+            </div>
+        </div>
+
+        <!-- SCREEN 6 — GIFT -->
+        <section id="gift-section" class="screen gift-screen" aria-label="A special surprise">
+            <div class="section-head scroll-reveal">
+                <span class="section-label">One more thing…</span>
+                <h2 class="section-title">A Special Surprise</h2>
+                <p class="section-sub">Tap the gift to open it!</p>
+            </div>
+            <div class="gift-wrapper scroll-reveal">
+                <button id="gift-box" class="gift-box" aria-label="Open the gift box">
+                    <div class="gift-bow-area">
+                        <div class="bow-l"></div>
+                        <div class="bow-r"></div>
+                        <div class="bow-knot"></div>
+                    </div>
+                    <div class="gift-lid"><div class="lid-ribbon"></div></div>
+                    <div class="gift-base">
+                        <div class="base-ribbon"></div>
+                        <div class="gift-msg" id="gift-msg" aria-live="polite">
+                            <p id="gift-msg-text">You are my greatest gift. Never forget that.&ensp;💝</p>
+                        </div>
+                    </div>
+                </button>
+                <p class="gift-hint" id="gift-hint">✨ Tap me! ✨</p>
+            </div>
+        </section>
+
+        <!-- SCREEN 7 — FINAL -->
+        <section id="final-section" class="screen final-screen" aria-label="Final message">
+            <div class="final-inner scroll-reveal">
+                <div class="final-heart" aria-hidden="true">♡</div>
+                <p class="final-text" id="final-text">
+                    No matter how much we grow up,<br>you'll always have your brother&ensp;♡
+                </p>
+                <button id="replay-btn" class="replay-btn" aria-label="Replay the surprise">
+                    <span>Replay the surprise</span>
+                    <span class="replay-arrow" aria-hidden="true">↺</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
